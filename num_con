@@ -1,0 +1,78 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+class num_con extends JFrame implements ActionListener{
+    JLabel l1 = new JLabel("Conversion");
+    JLabel l2 = new JLabel("Decimal");
+    JLabel l3 = new JLabel("Result : ");
+    JTextField t2 = new JTextField();
+    JTextField t3 = new JTextField();
+    JButton b1 = new JButton("Binary");
+    JButton b2 = new JButton("Octal");
+    JButton b3 = new JButton("Hex");
+    num_con(){
+        l1.setBounds(50,100,100,20);
+        l2.setBounds(50,140,100,20);
+        l3.setBounds(50,180,100,20);
+        t2.setBounds(200,140,100,20);
+        t3.setBounds(200,180,100,20);
+        b1.setBounds(50,250,100,20);
+        b2.setBounds(150,250,100,20);
+        b3.setBounds(250,250,100,20);
+        add(l1);
+        add(l2);
+        add(l3);
+        add(t2);
+        add(t3);
+        add(b1);
+        add(b2);
+        add(b3);
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        setTitle("Number System Conversion");
+        setLayout(null);
+        setVisible(true);
+        setSize(400,350);
+    }
+ public void actionPerformed(ActionEvent e){
+        int d = Integer.parseInt(t2.getText());
+        if(e.getSource() == b1){
+            int n, resBin = 0, i = 1;
+            while(d > 0){
+                n = d % 2;
+                d = d/2;
+                resBin = resBin + n*i;
+                i = i * 10;
+            }
+            t3.setText(String.valueOf(resBin));
+
+        }
+        if(e.getSource() == b2){
+            int n,resOct = 0, i = 1;
+            while(d > 0){
+                n = d % 8;
+                d = d/8;
+                resOct = resOct + n * i;
+                i = i * 10;
+            }
+            t3.setText(String.valueOf(resOct));
+        }
+        if(e.getSource() == b3){
+            String hex = "";
+            int n;
+            char hexchar[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+            while(d > 0)
+            {
+                n = d % 16;
+                hex = hexchar[n] + hex;
+                d = d/16;
+            }
+            t3.setText(String.valueOf(hex));
+        }
+ }
+
+    public static void main(String[] args) {
+        new num_con();
+    }
+}
